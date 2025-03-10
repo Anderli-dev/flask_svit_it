@@ -1,0 +1,45 @@
+# Ignore virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyo
+
+# Ignore log and temporary files
+logs/
+*.log
+*.out
+*.err
+tmp/
+temp/
+cache/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore secrets and local configuration files
+.env.sample
+
+# Ignore test-related files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignore Alembic migration files
+migrations/
+alembic/
+
+# Ignore unnecessary Docker files
+docker-compose.override.yml
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
