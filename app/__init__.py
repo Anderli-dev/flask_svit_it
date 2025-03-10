@@ -1,0 +1,8 @@
+from flask import Flask
+
+from config.config import Config
+from app.api.routes import api_bp
+
+app = Flask(__name__)
+app.config.from_object(Config)
+    
