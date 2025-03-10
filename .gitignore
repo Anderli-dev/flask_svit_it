@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Flask cache and logs
+instance/
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# SQLAlchemy migration files
+alembic/
+
+# Secrets and environment variables
+.env
+!.env.sample
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Pytest cache and coverage reports
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Docker files
+docker-compose.override.yml
+
+# Logs and temp files
+*.log
+*.out
+*.err
+tmp/
+temp/
+cache/
