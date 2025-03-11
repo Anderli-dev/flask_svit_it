@@ -1,23 +1,22 @@
-from flask import Response, jsonify, request, make_response
+from flask import Response, jsonify, make_response, request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
 from app.schemas.User import UserAuthenticationSchema
-from app.services.register_user import register_user
-
+from app.services.login_user import login_user
 
 user_auth_schema = UserAuthenticationSchema()
 
-class Register(Resource):
+class Login(Resource):
     def post(self) -> Response:
         try:
             data: dict = user_auth_schema.load(data=request.json)
             if not data:
                 return make_response({"message": "No input data provided"}, 400)
             
-            register_user_response: Response = register_user(data)
+            login_user_response: Response = login_user(data)
 
-            return register_user_response
+            return login_user_response
         
         except ValidationError as err:
             return make_response(jsonify({"error": err.messages}), 400)
