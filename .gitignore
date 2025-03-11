@@ -50,3 +50,7 @@ docker-compose.override.yml
 tmp/
 temp/
 cache/
+
+# Data folder
+uploads/*
+!uploads/.gitkeep

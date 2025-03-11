@@ -1,11 +1,15 @@
 
-from flask import Response, jsonify, make_response
+import os
+import tarfile
+import zipfile
+from flask import Response, jsonify, make_response, request
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 from marshmallow import ValidationError
+from app.utils.archive_handler import ArchiveHandler
+from app.utils.read_log import read_log
 
-
-class Log(Resource):
+class LogResource(Resource):
     @jwt_required()
     def get(self) -> Response:
         try:
@@ -19,7 +23,17 @@ class Log(Resource):
     @jwt_required()
     def post(self) -> Response:
         try:
-            pass
+            if 'file' not in request.files:
+                return {'message': 'No file part'}, 400
+            
+            file = request.files['file']
+            
+            handler = ArchiveHandler()
+            extracted_path = handler.process_file(file)
+            
+            read_log(extracted_path)
+            
+            return {'message': 'File uploaded successfully'}
         
         except ValidationError as err:
             return make_response(jsonify({"error": err.messages}), 400)

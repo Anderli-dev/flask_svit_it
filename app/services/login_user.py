@@ -14,6 +14,7 @@ def login_user(data: dict) -> Response:
     
     if verify_password(data['password'], user.password_hash):
         access_token: str = create_access_token(identity=user.username)
-        return make_response(token_schema.jsonify(access_token))
+
+        return make_response(token_schema.jsonify({"access_token": access_token}))
     else:
         return make_response({'error': 'Invalid credentials'}, 401)

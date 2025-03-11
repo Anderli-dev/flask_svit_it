@@ -2,10 +2,11 @@ from flask import Response, make_response
 from flask_jwt_extended import create_access_token
 from app.models.user import User
 from app import db
+from app.schemas.Token import TokenSchema
 from app.schemas.User import UserSchema
 from app.utils.hash_password import hash_password
 
-user_schema = UserSchema()
+token_schema = TokenSchema()
 
 def register_user(data: dict) -> Response:
     if User.query.filter_by(username=data['username']).first():
@@ -18,4 +19,4 @@ def register_user(data: dict) -> Response:
     
     access_token = create_access_token(identity=user.username)
     
-    return make_response({'access_token': access_token})
+    return make_response(token_schema.jsonify({"access_token": access_token}))
