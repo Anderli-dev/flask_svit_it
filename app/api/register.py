@@ -5,7 +5,6 @@ from marshmallow import ValidationError
 from app.schemas.User import UserAuthenticationSchema
 from app.services.register_user import register_user
 
-
 user_auth_schema = UserAuthenticationSchema()
 
 class Register(Resource):
