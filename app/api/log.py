@@ -10,11 +10,11 @@ class LogResource(Resource):
     @jwt_required()
     def get(self) -> Response:
         try:
-            from_time = request.args.get('from_time')
-            to_time = request.args.get('to_time')
-            keyword = request.args.get('keyword')
+            from_time: str = request.args.get('from_time')
+            to_time: str = request.args.get('to_time')
+            keyword: str = request.args.get('keyword')
             
-            logs_response = get_log(from_time, to_time, keyword)
+            logs_response: Response = get_log(from_time, to_time, keyword)
             
             return logs_response
         except Exception as e:

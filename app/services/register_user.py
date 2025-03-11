@@ -17,6 +17,6 @@ def register_user(data: dict) -> Response:
     db.session.add(user)
     db.session.commit()
     
-    access_token = create_access_token(identity=user.username)
+    access_token: str = create_access_token(identity=user.username)
     
     return make_response(token_schema.jsonify({"access_token": access_token}))

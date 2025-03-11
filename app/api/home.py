@@ -1,5 +1,5 @@
 from flask_restful import Resource
 
 class Home(Resource):
-    def get(self):
+    def get(self) -> dict:
         return {"msg": "Hello world!"}

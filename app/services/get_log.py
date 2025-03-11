@@ -6,7 +6,7 @@ from app.schemas.Log import LogSchema
 
 logs_schema = LogSchema(many=True)
 
-def get_log(from_time, to_time, keyword) -> Response:
+def get_log(from_time: str, to_time: str, keyword: str) -> Response:
     query = Log.query
             
     if from_time:
