@@ -1,15 +1,20 @@
 from flask import Flask
+from flask_marshmallow import Marshmallow
+from flask_sqlalchemy import SQLAlchemy
 
-from app.utils.db import db
 from config.config import Config
-from app.api.routes import api_bp
+
+db = SQLAlchemy()
+ma = Marshmallow()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())
     
     db.init_app(app)
-
+    ma.init_app(app)
+    
+    from app.api.routes import api_bp
     app.register_blueprint(api_bp, url_prefix="/api")
 
     return app
