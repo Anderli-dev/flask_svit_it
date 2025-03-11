@@ -16,7 +16,6 @@ class ArchiveHandler:
         return save_path
     
     def extract_archive(self, file_path):
-        print(file_path)
         filename:str = os.path.basename(file_path)
         os.makedirs(self.extracted_directory, exist_ok=True)
 
@@ -32,6 +31,8 @@ class ArchiveHandler:
         return os.path.join(self.extracted_directory, filename.split(".", 1)[0] + ".txt")
     
     def process_file(self, file):
+        # file saving and return of the location where the file is stored
         save_path = self.save_file(file)
+        # passing the location where the file is stored to get extracted path where the log file is stored
         extracted_path = self.extract_archive(save_path)
         return extracted_path

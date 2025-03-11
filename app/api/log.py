@@ -28,10 +28,10 @@ class LogResource(Resource):
             
             file = request.files['file']
             
-            handler = ArchiveHandler()
-            extracted_path = handler.process_file(file)
+            handler = ArchiveHandler() # a special class for handling different types of files
+            extracted_path = handler.process_file(file) # a function that starts processing
             
-            read_log(extracted_path)
+            read_log(extracted_path) # reading and writing the log to the database
             
             return make_response({'message': 'File uploaded successfully'})
         except Exception as e:

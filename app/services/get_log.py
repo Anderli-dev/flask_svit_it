@@ -10,9 +10,11 @@ def get_log(from_time, to_time, keyword) -> Response:
     query = Log.query
             
     if from_time:
+        # receiving a log from a specified time
         from_time = datetime.datetime.strptime(from_time, '%Y-%m-%d %H:%M:%S')
         query = query.filter(Log.timestamp >= from_time)
     if to_time:
+        #  receiving a log to a specified time
         to_time = datetime.datetime.strptime(to_time, '%Y-%m-%d %H:%M:%S')
         query = query.filter(Log.timestamp <= to_time)
     if keyword:
