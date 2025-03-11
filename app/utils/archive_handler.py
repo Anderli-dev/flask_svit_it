@@ -16,20 +16,20 @@ class ArchiveHandler:
         return save_path
     
     def extract_archive(self, file_path):
-        filename = os.path.basename(file_path)
-        extracted_path = os.path.join(self.extracted_directory, os.path.splitext(filename)[0])
-        os.makedirs(extracted_path, exist_ok=True)
+        print(file_path)
+        filename:str = os.path.basename(file_path)
+        os.makedirs(self.extracted_directory, exist_ok=True)
 
         if filename.endswith('.zip'):
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
-                zip_ref.extractall(extracted_path)
+                zip_ref.extractall(self.extracted_directory)
         elif filename.endswith('.tar'):
             with tarfile.open(file_path, 'r:') as tar_ref:
-                tar_ref.extractall(extracted_path)
+                tar_ref.extractall(self.extracted_directory)
         else:
             return file_path
         
-        return extracted_path
+        return os.path.join(self.extracted_directory, filename.split(".", 1)[0] + ".txt")
     
     def process_file(self, file):
         save_path = self.save_file(file)

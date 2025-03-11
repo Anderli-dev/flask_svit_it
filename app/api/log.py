@@ -1,22 +1,22 @@
-
-import os
-import tarfile
-import zipfile
-from flask import Response, jsonify, make_response, request
+from flask import Response, make_response, request
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource
-from marshmallow import ValidationError
+from app.services.get_log import get_log
 from app.utils.archive_handler import ArchiveHandler
 from app.utils.read_log import read_log
+
 
 class LogResource(Resource):
     @jwt_required()
     def get(self) -> Response:
         try:
-            pass
-        
-        except ValidationError as err:
-            return make_response(jsonify({"error": err.messages}), 400)
+            from_time = request.args.get('from_time')
+            to_time = request.args.get('to_time')
+            keyword = request.args.get('keyword')
+            
+            logs_response = get_log(from_time, to_time, keyword)
+            
+            return logs_response
         except Exception as e:
             return make_response({"message": f"An error occurred: {str(e)}"}, 500)
         
@@ -33,9 +33,6 @@ class LogResource(Resource):
             
             read_log(extracted_path)
             
-            return {'message': 'File uploaded successfully'}
-        
-        except ValidationError as err:
-            return make_response(jsonify({"error": err.messages}), 400)
+            return make_response({'message': 'File uploaded successfully'})
         except Exception as e:
             return make_response({"message": f"An error occurred: {str(e)}"}, 500)
